@@ -1,7 +1,7 @@
 <template>
     <div class="container ">
         <div class="d-flex mt-3">
-            <img v-bind:src="LogoPic">
+            <img :src="LogoPic">
         </div>
         <div class="row mt-5">
             <Todo />
