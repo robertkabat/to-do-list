@@ -10,7 +10,7 @@ Easiest way to boot up the project is to use Laravel Sail.
     ./vendor/bin/sail up -d
 ```
 
-Or something like that let's hope!
+Or something like that let's hope! Then the website should be accessible like this: http://to-do-list.test/tasks
 
 **2. What is not in the project?**
 
