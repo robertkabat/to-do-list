@@ -1,23 +1,24 @@
-## MLP To-DO - Instructions
+## MLP To-DO - quick summary
 
-You must demonstrate the following abilities/skills: make models, controllers, migrations, HTML, CSS, blade, Git commits, blade templates, etc. 
+**1. Installation**
 
-**1. Fork this repo**
+Easiest way to boot up the project is to use Laravel Sail.
 
-**2. Build front-end**
+```php
+    composer install
+    npm install
+    ./vendor/bin/sail up -d
+```
 
-   Layout must be as follows:
-   
-   ![Alt text](assets/site-layout.png?raw=true "Title")
-   Please note that the above image and logo are in the 'assets' folder.
+Or something like that let's hope!
 
-**3. Build To-Do list functionality** 
+**2. What is not in the project?**
 
-     A user should be able to
-     * Create a task.
-     * Delete a task.
-     * Mark a task as completed.
-     
+There is no user related code seeing as this is just a quick demo.
 
-**Good Luck !!! Once done, please send us the link of your repo.**
+**3. Summary** 
+
+Lot more fun stuff could go into that project, however I didn't want to make you to go through all this code review! Also, I wanted
+to note that normally, in bigger projects I would build up and polish presented solutions
+into much nicer structure. I would probably also justify using Redis. I like Redis.
    
