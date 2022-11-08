@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-3">
-        Column
-        {{ tasks }}
+        <input v-model="content" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Insert task name">
+        <button @click="addTask" :disabled="content.length < 1" type="submit" class="w-100 mt-3 btn btn-primary">Add</button>
     </div>
     <div class="col-md-9">
         <table class="table table-striped">
@@ -15,7 +15,7 @@
             <tbody>
                 <tr v-for="(task, index) in tasks" :key="task.id">
                     <th scope="row">{{ index + 1 }}</th>
-                    <td>{{ task.content }}</td>
+                    <td :class="{'text-decoration-line-through': task.completed_at}">{{ task.content }}</td>
                     <td>
                         <div>
                             <FontAwesomeIcon
@@ -46,9 +46,11 @@ library.add(faCheckSquare, faTrashCan)
 import AlreadyCompletedModal from '@/components/AlreadyCompletedModal.vue';
 
 let tasks = ref(null)
+let content = ref('')
 let alreadyCompletedModal = ref(null)
 
 const getTasks = () => axios.get('/api/tasks').then(response => tasks.value = response.data.data)
+const addTask = () => axios.post('/api/tasks', { content: content.value }).then(() => getTasks())
 const markAsDeleted = id => axios.delete(`/api/tasks/${id}`).then(() => getTasks())
 const markAsCompleted = task => {
     if (task.completed_at) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\CreateTask;
 use App\Http\Requests\DeleteTask;
 use App\Http\Requests\UpdateTask;
 use App\Http\Resources\TasksCollection;
@@ -27,6 +28,11 @@ class TasksController extends BaseController
     public function index(Request $request)
     {
         return new TasksCollection($this->tasksRepository->getTasks($request->only('completed')));
+    }
+
+    public function create(CreateTask $request)
+    {
+        $this->tasksRepository->create($request->only('content'));
     }
 
     public function update(UpdateTask $request)

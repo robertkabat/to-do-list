@@ -28,6 +28,21 @@ class TasksRepository
     }
 
     /**
+     * Create new task.
+     *
+     * @param array $data
+     * @return Task
+     */
+    public function create(array $data): Task
+    {
+        $task = new $this->model();
+        $task->content = $data['content'];
+        $task->save();
+
+        return $task;
+    }
+
+    /**
      * Delete the task and return its ID.
      *
      * @param int $taskId

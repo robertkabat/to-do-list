@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class UpdateTask extends ApiRequest
+class CreateTask extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class UpdateTask extends ApiRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:tasks,id',
-            'content' => 'sometimes|string|max:500|min:10',
-            'completed' => 'sometimes|boolean'
+            'content' => 'sometimes|string|max:500',
         ];
     }
 }
