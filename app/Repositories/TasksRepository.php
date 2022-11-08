@@ -16,6 +16,8 @@ class TasksRepository
     }
 
     /**
+     * Get (optionally filtered) tasks.
+     *
      * @param array $criteria
      * @return Builder|Collection
      */

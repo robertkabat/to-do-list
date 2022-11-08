@@ -7,6 +7,7 @@ use App\Http\Requests\DeleteTask;
 use App\Http\Requests\UpdateTask;
 use App\Http\Resources\TasksCollection;
 use App\Repositories\TasksRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -30,16 +31,32 @@ class TasksController extends BaseController
         return new TasksCollection($this->tasksRepository->getTasks($request->only('completed')));
     }
 
+    /**
+     * Crate a new task.
+     *
+     * @param CreateTask $request
+     */
     public function create(CreateTask $request)
     {
         $this->tasksRepository->create($request->only('content'));
     }
 
+    /**
+     * Update existing task.
+     *
+     * @param UpdateTask $request
+     */
     public function update(UpdateTask $request)
     {
         $this->tasksRepository->update($request->only('id', 'content', 'completed'));
     }
 
+    /**
+     * Delete existing task.
+     *
+     * @param DeleteTask $request
+     * @return JsonResponse
+     */
     public function delete(DeleteTask $request)
     {
         return response()->json(['data' => [ 'id' => $this->tasksRepository->deleteTask($request->id)]]);
