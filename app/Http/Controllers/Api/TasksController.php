@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\DeleteTask;
+use App\Http\Requests\UpdateTask;
+use App\Http\Resources\TasksCollection;
 use App\Repositories\TasksRepository;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -23,10 +22,20 @@ class TasksController extends BaseController
      * Index all tasks (filter by completed if needed).
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return TasksCollection
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request)
     {
-        return response()->json(['data' => $this->tasksRepository->getTasks($request->only('completed'))]);
+        return new TasksCollection($this->tasksRepository->getTasks($request->only('completed')));
+    }
+
+    public function update(UpdateTask $request)
+    {
+        $this->tasksRepository->update($request->only('id', 'content', 'completed'));
+    }
+
+    public function delete(DeleteTask $request)
+    {
+        return response()->json(['data' => [ 'id' => $this->tasksRepository->deleteTask($request->id)]]);
     }
 }
