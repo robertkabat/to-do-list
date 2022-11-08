@@ -28,10 +28,16 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons'
 library.add(faCheckSquare, faTrashCan)
+
+onMounted(async () => {
+    let res = await axios.get('/api/tasks')
+    console.log(res)
+});
 </script>
 
 <style scoped>
@@ -42,4 +48,6 @@ library.add(faCheckSquare, faTrashCan)
     gap: 20px;
     margin-right: 10px;
 }
+
+
 </style>
