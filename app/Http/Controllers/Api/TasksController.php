@@ -26,7 +26,7 @@ class TasksController extends BaseController
      * @param Request $request
      * @return TasksCollection
      */
-    public function index(Request $request)
+    public function index(Request $request): TasksCollection
     {
         return new TasksCollection($this->tasksRepository->getTasks($request->only('completed')));
     }
@@ -35,20 +35,26 @@ class TasksController extends BaseController
      * Crate a new task.
      *
      * @param CreateTask $request
+     * @return JsonResponse
      */
-    public function create(CreateTask $request)
+    public function create(CreateTask $request): JsonResponse
     {
-        $this->tasksRepository->create($request->only('content'));
+       $this->tasksRepository->create($request->only('content'));
+
+       return response()->json([], 201);
     }
 
     /**
      * Update existing task.
      *
      * @param UpdateTask $request
+     * @return JsonResponse
      */
-    public function update(UpdateTask $request)
+    public function update(UpdateTask $request): JsonResponse
     {
         $this->tasksRepository->update($request->only('id', 'content', 'completed'));
+
+        return response()->json([], 200);
     }
 
     /**
@@ -57,7 +63,7 @@ class TasksController extends BaseController
      * @param DeleteTask $request
      * @return JsonResponse
      */
-    public function delete(DeleteTask $request)
+    public function delete(DeleteTask $request): JsonResponse
     {
         return response()->json(['data' => [ 'id' => $this->tasksRepository->deleteTask($request->id)]]);
     }
